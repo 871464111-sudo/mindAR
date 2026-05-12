@@ -1,0 +1,29 @@
+<html>
+ <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+ </head>
+ <body>
+ <!-- 这里把imageTargetSrc改成自己的mind文件 -->
+ <a-scene mindar-image="imageTargetSrc: ./my-target.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+ <!-- 这里把assets改成自己的资源 -->
+ <a-assets>
+	<img id="card" src="./my-card.png" />
+	<a-asset-item id="avatarModel" src="./my-model.glb"></a-asset-item>
+ </a-assets>
+
+ <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+ <a-entity mindar-image-target="targetIndex: 0">
+  <!-- 这里把plane的宽高改成自己目标图片的宽高比，比如800x600的话，就是width=1, height=0.75 -->
+  <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+  <!-- 这里调整模型的缩放和位置，适配你的模型 -->
+  <a-gltf-model rotation="0 0 0 " position="0 0 0.2" scale="0.01 0.01 0.01" src="#avatarModel"
+   animation="property: position; to: 0 0.1 0.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+  >
+  </a-gltf-model>
+ </a-entity>
+ </a-scene>
+ </body>
+</html>
